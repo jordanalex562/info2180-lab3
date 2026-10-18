@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         square.addEventListener("click", function () {
             
-
             square.textContent = currentPlayer;
             
             square.classList.add(currentPlayer);
@@ -22,5 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentPlayer = "X";
             }
         });
+
+        square.addEventListener("mouseenter", function () {
+            square.classList.add("hover");
+        });
+
+        square.addEventListener("mouseleave", function () {
+            square.classList.remove("hover");
+        });
+        
     });
 });
