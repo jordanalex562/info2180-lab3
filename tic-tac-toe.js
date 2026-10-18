@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const newGameButton = document.querySelector(".btn");
   
     let currentPlayer = "X"; 
+    let gameOver = false;
 
     function checkWinner() {
         
@@ -24,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const winner = squares[a].textContent;
                 statusDiv.textContent = "Congratulations! " + winner + " is the Winner!";
                 statusDiv.classList.add("you-won");
-                return; // Stop checking, we already found a winner
+                gameOver = true;
+
+                return; 
             }
         }
     }
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         square.addEventListener("click", function () {
-            if (square.textContent !== "") {
+            if (gameOver || square.textContent !== "") {
                 return; 
             }
             
@@ -43,11 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
             
             checkWinner();
 
-
+            if (!gameOver) {
             if (currentPlayer === "X") {
                 currentPlayer = "O";
             } else {
                 currentPlayer = "X";
+            }
             }
         });
 
@@ -68,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         currentPlayer = "X";
+        gameOver = false;
         statusDiv.textContent = "Move your mouse over a square and click to play an X or an O.";
         statusDiv.classList.remove("you-won");
     });
